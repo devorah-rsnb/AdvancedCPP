@@ -1,0 +1,18 @@
+# Compile the executable. In the terminal in the Conway directory, run this:
+# $ make -f make_life
+CC = g++
+CFLAGS="-std=c++23"
+DEPS = grid.h cell.h ansi_escapes.h life.h
+OBJ = main.o grid.o cell.o ansi_escapes.o
+
+%.o: %.cc $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+life.exe: $(OBJ)
+	$(CC) -o $@ $^ $(CFLAGS)
+
+run: life.exe
+	./life.exe
+
+clean:
+	rm -f $(OBJ) life.exe
